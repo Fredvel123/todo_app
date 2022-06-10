@@ -41,7 +41,11 @@ export default function Tasks() {
       <Header />
       <InsertTasks />
       <TasksList state={items} setState={setItems} />
-      <FooterTasks state={itemState} setState={setItemState} />
+      <FooterTasks
+        tasksLength={items}
+        state={itemState}
+        setState={setItemState}
+      />
     </TasksStyled>
   );
 }

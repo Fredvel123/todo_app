@@ -5,7 +5,7 @@ import {
   FooterStyles,
 } from "../../../styles/tasksStyles/footerTasksStyles";
 
-export default function FooterTasks({ state, setState }) {
+export default function FooterTasks({ tasksLength, state, setState }) {
   const theme = useSelector((state) => state.theme.value);
   const tasks = useSelector((state) => state.tasks.value);
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function FooterTasks({ state, setState }) {
     <>
       <FooterStyles mode={theme}>
         <div className="up">
-          <p>5 items left</p>
+          <p>{tasksLength.length} items left</p>
           <p onClick={removeAllTasksCompleted}>Clear completed</p>
         </div>
       </FooterStyles>

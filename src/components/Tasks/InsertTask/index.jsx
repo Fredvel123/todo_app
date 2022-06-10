@@ -11,11 +11,11 @@ export default function InsertTasks() {
   const dispatch = useDispatch();
 
   const handlerChange = (e) => {
-    setText(e.target.value);
+    if (e.target.value.length < 27) setText(e.target.value);
   };
 
   const createNewTask = () => {
-    if (!tasks.find((t) => t.name === text)) {
+    if (!tasks.find((t) => t.name === text) & (text.length < 27)) {
       dispatch(setTasks([...tasks, { name: text, done: false }]));
       setText("");
     }
@@ -31,6 +31,7 @@ export default function InsertTasks() {
     if (data !== null) {
       dispatch(setTasks(JSON.parse(data)));
     }
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { TasksListStyles } from "../../../styles/tasksStyles/tasksList";
 import checkIcon from "../../../assets/images/icon-check.svg";
 import crossIcon from "../../../assets/images/icon-cross.svg";
-import tasks, { setTasks } from "../../../redux/slices/tasks";
+import { setTasks } from "../../../redux/slices/tasks";
 
-export default function TasksList({ state, setState }) {
+export default function TasksList({ state }) {
   const theme = useSelector((state) => state.theme.value);
   const tasks = useSelector((state) => state.tasks.value);
   const dispatch = useDispatch();

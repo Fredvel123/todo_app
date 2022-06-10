@@ -4,6 +4,7 @@ import { dark, light } from "../colors.js";
 export const InsertTaskStyles = styled.form`
   margin-top: 5vh;
   input {
+    border-radius: 4px;
     width: 86%;
     padding: 4vh 7%;
     background: ${({ mode }) =>

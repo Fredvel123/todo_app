@@ -1,11 +1,48 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { InsertTaskStyles } from "../../../styles/tasksStyles/InsertTasks";
+import { setTasks } from "../../../redux/slices/tasks.js";
 
 export default function InsertTasks() {
   const theme = useSelector((state) => state.theme.value);
+  // tasks
+  const [text, setText] = useState("");
+  const tasks = useSelector((state) => state.tasks.value);
+  const dispatch = useDispatch();
+
+  const handlerChange = (e) => {
+    setText(e.target.value);
+  };
+
+  const createNewTask = () => {
+    if (!tasks.find((t) => t.name === text)) {
+      dispatch(setTasks([...tasks, { name: text, done: false }]));
+      setText("");
+    }
+  };
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    createNewTask();
+  };
+  // storage tasks at localstorage
+  useEffect(() => {
+    const data = localStorage.getItem("tasks");
+    if (data !== null) {
+      dispatch(setTasks(JSON.parse(data)));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
   return (
-    <InsertTaskStyles mode={theme}>
-      <input type="text" placeholder="create a new task" />
+    <InsertTaskStyles onSubmit={handlerSubmit} mode={theme}>
+      <input
+        type="text"
+        onChange={handlerChange}
+        value={text}
+        placeholder="create a new task"
+      />
     </InsertTaskStyles>
   );
 }

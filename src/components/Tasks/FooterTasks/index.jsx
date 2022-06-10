@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setTasks } from "../../../redux/slices/tasks";
 import {
   DownStyles,
   FooterStyles,
@@ -6,26 +7,34 @@ import {
 
 export default function FooterTasks({ state, setState }) {
   const theme = useSelector((state) => state.theme.value);
+  const tasks = useSelector((state) => state.tasks.value);
+  const dispatch = useDispatch();
+
   // change color state
   const changeAllState = () => {
     setState({
       all: true,
-      activate: false,
+      active: false,
       completed: false,
     });
   };
   const changeActivateState = () => {
-    setState({ all: false, activate: true, completed: false });
+    setState({ all: false, active: true, completed: false });
   };
   const changeCompletedState = () => {
-    setState({ all: false, activate: false, completed: true });
+    setState({ all: false, active: false, completed: true });
+  };
+
+  const removeAllTasksCompleted = () => {
+    const currentTasksNotCompleted = tasks.filter((t) => t.done === false);
+    dispatch(setTasks(currentTasksNotCompleted));
   };
   return (
     <>
       <FooterStyles mode={theme}>
         <div className="up">
           <p>5 items left</p>
-          <p>Clear completed</p>
+          <p onClick={removeAllTasksCompleted}>Clear completed</p>
         </div>
       </FooterStyles>
       <DownStyles mode={theme} color={state}>

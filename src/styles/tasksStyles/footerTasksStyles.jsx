@@ -7,6 +7,7 @@ export const FooterStyles = styled.footer`
   padding: 0 7%;
   padding-top: 3vh;
   p {
+    cursor: pointer;
     color: gray;
     font-weight: bold;
   }
@@ -33,6 +34,7 @@ export const DownStyles = styled.div`
   display: flex;
   justify-content: space-between;
   P {
+    cursor: pointer;
     font-weight: bold;
   }
   .all {
@@ -43,7 +45,7 @@ export const DownStyles = styled.div`
     color: ${({ color }) => (color.completed ? "#009688" : "gray")};
   }
   .activate {
-    color: ${({ color }) => (color.activate ? "#009688" : "gray")};
+    color: ${({ color }) => (color.active ? "#009688" : "gray")};
   }
   @media screen and (max-width: 900px) {
     p {
